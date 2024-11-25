@@ -20,6 +20,7 @@ SRC	=	./sources/main.c		\
 		./sources/GUI/sign_up_page.c	\
 		./sources/GUI/chatbot_page.c	\
 		./sources/GUI/events.c	\
+		./lib/my_strlen.c	\
 
 OBJ	=	$(SRC:.c=.o)
 
