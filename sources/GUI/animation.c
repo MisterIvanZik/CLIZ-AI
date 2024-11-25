@@ -17,6 +17,8 @@
 Animation_t *loadAnimation(char *filename, int frameCount, float frameDuration, int frameColumns, int frameRows)
 {
     Animation_t *animation = malloc(sizeof(Animation_t));
+    int frameWidth = 0;
+    int frameHeight = 0;
 
     animation->texture = sfTexture_createFromFile(filename, NULL);
     if (!animation->texture) {
@@ -26,8 +28,8 @@ Animation_t *loadAnimation(char *filename, int frameCount, float frameDuration, 
     animation->frames = malloc(sizeof(sfIntRect) * frameCount);
     animation->frameCount = frameCount;
     animation->frameDuration = frameDuration;
-    int frameWidth = sfTexture_getSize(animation->texture).x / frameColumns;
-    int frameHeight = sfTexture_getSize(animation->texture).y / frameRows;
+    frameWidth = sfTexture_getSize(animation->texture).x / frameColumns;
+    frameHeight = sfTexture_getSize(animation->texture).y / frameRows;
     for (int i = 0; i < frameCount; i++) {
         int column = i % frameColumns;
         int row = i / frameColumns;
@@ -49,11 +51,13 @@ void playAnimation(sfRenderWindow *window, Animation_t *animation)
     sfClock *clock = sfClock_create();
     float elapsedTime = 0.0f;
     int currentFrame = 0;
+    int frameWidth;
+    int frameHeight;
 
     sfSprite_setTexture(sprite, animation->texture, sfTrue);
     sfVector2u windowSize = sfRenderWindow_getSize(window);
-    int frameWidth = animation->frames[0].width;
-    int frameHeight = animation->frames[0].height;
+    frameWidth = animation->frames[0].width;
+    frameHeight = animation->frames[0].height;
     sfVector2f centeredPosition = {
         (windowSize.x - frameWidth) / 2.0f,
         (windowSize.y - frameHeight) / 2.0f

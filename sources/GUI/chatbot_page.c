@@ -17,9 +17,10 @@
 
 void drawChatbotPage(Struct_t *cliz)
 {
-    sfRenderWindow_drawSprite(cliz->window, cliz->backgroundSprite_chat, NULL);
+    sfText *title = NULL;
 
-    sfText *title = sfText_create();
+    sfRenderWindow_drawSprite(cliz->window, cliz->backgroundSprite_chat, NULL);
+    title = sfText_create();
     sfText_setString(title, "Chatbot");
     sfText_setFont(title, cliz->font);
     sfText_setCharacterSize(title, 30);

@@ -15,9 +15,35 @@
 #include "struct.h"
 #include "prototypes.h"
 
+void drawTextBox(sfRenderWindow *window, sfFont *font, char *label, sfVector2f position)
+{
+    sfRectangleShape *box = NULL;
+    sfText *text = NULL;
+
+    box = sfRectangleShape_create();
+    sfRectangleShape_setSize(box, (sfVector2f){400, 50});
+    sfRectangleShape_setPosition(box, position);
+    sfRectangleShape_setFillColor(box, sfColor_fromRGB(255, 255, 255));
+    sfRectangleShape_setOutlineThickness(box, 2);
+    sfRectangleShape_setOutlineColor(box, sfBlack);
+    sfRenderWindow_drawRectangleShape(window, box, NULL);
+    sfRectangleShape_destroy(box);
+
+    text = sfText_create();
+    sfText_setString(text, label);
+    sfText_setFont(text, font);
+    sfText_setCharacterSize(text, 20);
+    sfText_setFillColor(text, sfBlack);
+    sfText_setPosition(text, (sfVector2f){position.x + 10, position.y + 10});
+    sfRenderWindow_drawText(window, text, NULL);
+    sfText_destroy(text);
+}
+
 void drawSignUpPage(Struct_t *cliz)
 {
-    sfText *title = sfText_create();
+    sfText *title = NULL;
+
+    title = sfText_create();
     sfText_setString(title, "Sign Up");
     sfText_setFont(title, cliz->font);
     sfText_setCharacterSize(title, 30);
@@ -25,58 +51,7 @@ void drawSignUpPage(Struct_t *cliz)
     sfText_setPosition(title, (sfVector2f){850, 100});
     sfRenderWindow_drawText(cliz->window, title, NULL);
     sfText_destroy(title);
-
-    sfRectangleShape *usernameBox = sfRectangleShape_create();
-    sfRectangleShape_setSize(usernameBox, (sfVector2f){400, 50});
-    sfRectangleShape_setPosition(usernameBox, (sfVector2f){700, 200});
-    sfRectangleShape_setFillColor(usernameBox, sfColor_fromRGB(255, 255, 255));
-    sfRectangleShape_setOutlineThickness(usernameBox, 2);
-    sfRectangleShape_setOutlineColor(usernameBox, sfBlack);
-    sfRenderWindow_drawRectangleShape(cliz->window, usernameBox, NULL);
-    sfRectangleShape_destroy(usernameBox);
-
-    sfText *usernameText = sfText_create();
-    sfText_setString(usernameText, "Username");
-    sfText_setFont(usernameText, cliz->font);
-    sfText_setCharacterSize(usernameText, 20);
-    sfText_setFillColor(usernameText, sfBlack);
-    sfText_setPosition(usernameText, (sfVector2f){710, 210});
-    sfRenderWindow_drawText(cliz->window, usernameText, NULL);
-    sfText_destroy(usernameText);
-
-    sfRectangleShape *emailBox = sfRectangleShape_create();
-    sfRectangleShape_setSize(emailBox, (sfVector2f){400, 50});
-    sfRectangleShape_setPosition(emailBox, (sfVector2f){700, 300});
-    sfRectangleShape_setFillColor(emailBox, sfColor_fromRGB(255, 255, 255));
-    sfRectangleShape_setOutlineThickness(emailBox, 2);
-    sfRectangleShape_setOutlineColor(emailBox, sfBlack);
-    sfRenderWindow_drawRectangleShape(cliz->window, emailBox, NULL);
-    sfRectangleShape_destroy(emailBox);
-
-    sfText *emailText = sfText_create();
-    sfText_setString(emailText, "Email");
-    sfText_setFont(emailText, cliz->font);
-    sfText_setCharacterSize(emailText, 20);
-    sfText_setFillColor(emailText, sfBlack);
-    sfText_setPosition(emailText, (sfVector2f){710, 310});
-    sfRenderWindow_drawText(cliz->window, emailText, NULL);
-    sfText_destroy(emailText);
-
-    sfRectangleShape *passwordBox = sfRectangleShape_create();
-    sfRectangleShape_setSize(passwordBox, (sfVector2f){400, 50});
-    sfRectangleShape_setPosition(passwordBox, (sfVector2f){700, 400});
-    sfRectangleShape_setFillColor(passwordBox, sfColor_fromRGB(255, 255, 255));
-    sfRectangleShape_setOutlineThickness(passwordBox, 2);
-    sfRectangleShape_setOutlineColor(passwordBox, sfBlack);
-    sfRenderWindow_drawRectangleShape(cliz->window, passwordBox, NULL);
-    sfRectangleShape_destroy(passwordBox);
-
-    sfText *passwordText = sfText_create();
-    sfText_setString(passwordText, "Password");
-    sfText_setFont(passwordText, cliz->font);
-    sfText_setCharacterSize(passwordText, 20);
-    sfText_setFillColor(passwordText, sfBlack);
-    sfText_setPosition(passwordText, (sfVector2f){710, 410});
-    sfRenderWindow_drawText(cliz->window, passwordText, NULL);
-    sfText_destroy(passwordText);
+    drawTextBox(cliz->window, cliz->font, "Username", (sfVector2f){700, 200});
+    drawTextBox(cliz->window, cliz->font, "Email", (sfVector2f){700, 300});
+    drawTextBox(cliz->window, cliz->font, "Password", (sfVector2f){700, 400});
 }

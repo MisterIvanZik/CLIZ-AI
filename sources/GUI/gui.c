@@ -53,14 +53,14 @@ void drawHomePage(Struct_t *cliz)
 
 void drawWindow(Struct_t *cliz)
 {
+    Animation_t *animation = NULL;
     sfColor beigeColor;
 
     beigeColor.r = 245;
     beigeColor.g = 245;
     beigeColor.b = 220;
-
     if (!cliz->animationPlayed) {
-        Animation_t *animation = loadAnimation("assets/images/intro_one.png", FRAME_COUNT, FRAME_DURATION, FRAME_COLUMNS, FRAME_ROWS);
+        animation = loadAnimation("assets/images/intro_one.png", FRAME_COUNT, FRAME_DURATION, FRAME_COLUMNS, FRAME_ROWS);
         if (animation) {
             playAnimation(cliz->window, animation);
             destroyAnimation(animation);
